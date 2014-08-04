@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Bible Language Comparison</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div class="navbar navbar-default navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+				  <a href="#" class="navbar-brand">Bible Language Comparison</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class=" bs-component">
+            <div class="jumbotron ">
+				<br>
+				<h2>Welcome</h2>
+				<p>Bible Language Comparison allows students of the Bible to compare the Bible in different languages.</p>
+				<!--<p id="howTo"><a class="btn btn-primary btn-lg">How does it work?</a></p>-->
+				<button id="howTo" class="btn btn-default btn-md" type="button" data-toggle="modal" data-target="#how">How does it work?</button>
+            </div>
+		</div>
+
+		<div id="how" class="modal">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				<h4 class="modal-title">Instructions</h4>
+			  </div>
+			  <div class="modal-body">
+				<ul>
+					<li>Select the book you would like to translate.</li>
+					<li>Select the source language.</li>
+					<li>Select the other language you would like the book to be translated in.</li>
+				</ul>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+		<div class="col-xs-12">
+            <div class="well bs-component alignCenter">
+				<div class="alignCenter">
+					
+					<button id="getBook" class="btn btn-default btn-md " type="button" data-toggle="modal" data-target="#allBooks">Book</button>
+					
+					<div class="selectOptionContainer">
+						<div class="btn-group selectOption">
+						  <button id="fromLangBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							Language
+							<span class="caret"></span>
+						  </button>
+						  <ul id="fromLangVal" class="dropdown-menu">
+							<li><a href="#">English</a></li>
+							<li><a href="#">French</a></li>
+						   </ul>
+						</div>
+					</div>
+					
+					<div class="selectOptionContainer">
+						<div class="btn-group selectOption">
+						  <button id="toLangBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+							Language
+							<span class="caret"></span>
+						  </button>
+						  <ul id="toLangVal" class="dropdown-menu">
+							<li><a href="#">English</a></li>
+							<li><a href="#">French</a></li>
+						   </ul>
+						</div>
+					</div>
+					
+					<button id="submitBtn" type="button" class="btn btn-primary btn-md">Submit</button>
+					
+				</div>	
+          </div>
+		</div>
+		
+		<div id="allBooks" class="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+						<h4 class="modal-title">Please Select a book</h4>
+					</div>
+					<div class="modal-body">
+						<h4 class="partTitle">Old Testament</h4>
+						<div class="bookContainer ">
+							<ul id="selectBook">
+								<li class="book btn btn-default">Genesis</li>
+								<li class="book btn btn-default">Exodus</li>
+								<li class="book btn btn-default">Leviticus</li>
+								<li class="book btn btn-default">Numbers</li>
+								<li class="book btn btn-default">Deuteronomy</li>
+								<li class="book btn btn-default">Joshua</li>
+								<li class="book btn btn-default">Judges</li>
+								<li class="book btn btn-default">Ruth</li>
+								<li class="book btn btn-default">1 Samuel</li>
+								<li class="book btn btn-default">2 Samuel</li>
+								<li class="book btn btn-default">1 Kings</li>
+								<li class="book btn btn-default">2 Kings</li>
+								<li class="book btn btn-default">1 Chronicles</li>
+								<li class="book btn btn-default">2 Chronicles</li>
+								<li class="book btn btn-default">Ezra</li>
+								<li class="book btn btn-default">Nehemiah</li>
+								<li class="book btn btn-default">Esther</li>
+								<li class="book btn btn-default">Job</li>
+								<li class="book btn btn-default">Psalm</li>
+								<li class="book btn btn-default">Proverbs</li>
+								<li class="book btn btn-default">Ecclesiastes</li>
+								<li class="book btn btn-default">Song of Solomon</li>
+								<li class="book btn btn-default">Isaiah</li>
+								<li class="book btn btn-default">Jeremiah</li>
+								<li class="book btn btn-default">Lamentations</li>
+								<li class="book btn btn-default">Ezekiel</li>
+								<li class="book btn btn-default">Daniel</li>
+								<li class="book btn btn-default">Hosea</li>
+								<li class="book btn btn-default">Joel</li>
+								<li class="book btn btn-default">Amos</li>
+								<li class="book btn btn-default">Obadiah</li>
+								<li class="book btn btn-default">Jonah</li>
+								<li class="book btn btn-default">Micah</li>
+								<li class="book btn btn-default">Nahum</li>
+								<li class="book btn btn-default">Habakkuk</li>
+								<li class="book btn btn-default">Zephaniah</li>
+								<li class="book btn btn-default">Haggai</li>
+								<li class="book btn btn-default">Zechariah</li>
+								<li class="book btn btn-default">Malachi</li>
+							</ul>
+						</div>
+					</div>
+					<div class="modal-body">
+						<h4 class="partTitle">New Testament</h4>
+						<div class="bookContainer">
+							<ul id="selectBook" >
+								<li class="book btn btn-default">Matthew</li>
+								<li class="book btn btn-default">Mark</li>
+								<li class="book btn btn-default">Luke</li>
+								<li class="book btn btn-default">John</li>
+								<li class="book btn btn-default">Acts</li>
+								<li class="book btn btn-default">Romans</li>
+								<li class="book btn btn-default">1 Corinthians</li>
+								<li class="book btn btn-default">2 Corinthians</li>
+								<li class="book btn btn-default">Galatians</li>
+								<li class="book btn btn-default">Ephesians</li>
+								<li class="book btn btn-default">Philippians</li>
+								<li class="book btn btn-default">Colossians</li>
+								<li class="book btn btn-default">1 Thessalonians</li>
+								<li class="book btn btn-default">2 Thessalonians</li>
+								<li class="book btn btn-default">1 Timothy</li>
+								<li class="book btn btn-default">2 Timothy</li>
+								<li class="book btn btn-default">Titus</li>
+								<li class="book btn btn-default">Philemon</li>
+								<li class="book btn btn-default">Hebrews</li>
+								<li class="book btn btn-default">James</li>
+								<li class="book btn btn-default">1 Peter</li>
+								<li class="book btn btn-default">2 Peter</li>
+								<li class="book btn btn-default">1 John</li>
+								<li class="book btn btn-default">2 John</li>
+								<li class="book btn btn-default">3 John</li>
+								<li class="book btn btn-default">Jude</li>
+								<li class="book btn btn-default">Revelation</li>
+							</ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--<div id="result" class="col-lg-12 alignCenter">-->
+			<div id="result" class="col-lg-12 alignCenter">
+			</div>
+			<div class="col-lg-6">
+				<div id="fromLangDiv" class="panel panel-primary">
+					<div class="panel-heading">
+					  <h3 class="panel-title" id="fromLangHead"></h3>
+					</div>
+					<div id="resultContentFrom" class="panel-body">
+					  <!--Panel content 1-->
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-6">
+				<div id="toLangDiv" class="panel panel-primary">
+					<div class="panel-heading">
+					  <h3 class="panel-title" id="toLangHead"></h3>
+					</div>
+					<div id="resultContentTo" class="panel-body">
+					  <!--Panel content 2-->
+					</div>
+				</div>	
+			</div>
+		<!--</div>-->
+		
+		<div id="error" class="alignCenter ">
+
+			<div class="alert alert-dismissable alert-danger alignCenter">
+            	<strong>Oh snap!</strong> Something went wrong with your request (See Below)
+            	<div id="errorContent" class="errorDesc"></div>	
+            	<br>
+            	<button id="reloadBtn" type="button" class="btn btn-primary">Reload and try again</button>
+        	</div>
+		</div>
+				
+		
+		<link rel="stylesheet" href="styles/main.css">
+		<link rel="stylesheet" href="styles/bootstrap.min.css">
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+	</body>
+</html>
