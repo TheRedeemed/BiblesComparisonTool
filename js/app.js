@@ -20,12 +20,9 @@ $(document).ready(function(){
 	bookToTranslateIndex = $(this).index();
 	bookToTranslateName = $(this).text();
 	
+	$('#fromLangDiv').hide();
+	$('#toLangDiv').hide();
 	$('#allBooks').modal('hide');
-	
-	//$('#getBook').empty();
-	//$('#getBook').append(bookToTranslateName);
-	
-	//alert(bookToTranslateName);
 	
 	if(bookToTranslateName != ''){
 		$('#fromLangBtn').attr("disabled", false);
@@ -35,20 +32,18 @@ $(document).ready(function(){
 	
 	$('#fromLangVal li').click(function(){
 		fromLang = $(this).text();
-		//alert(bookToTranslateName + ' ' + fromLang);
 		
 		if(fromLang != ''){
 		$('#toLangBtn').attr("disabled", false);
+
+		getBookName(bookToTranslateName,fromLang,'#fromLangDiv','#fromLangHead','#resultContentFrom');
 		
-		//$('#fromLangVal').empty();
-		//$('#fromLangVal').append(fromLang);
-	}
+		}
 	});
 	
 	
 	$('#toLangVal li').click(function(){
 		toLang = $(this).text();
-		//alert(bookToTranslateName + ' ' + fromLang + ' ' + toLang);
 		
 		if(toLang != ''){
 		$('#submitBtn').attr("disabled", false);
@@ -56,20 +51,14 @@ $(document).ready(function(){
 	});
 	
 
-		$.ajaxSetup ({
+	$.ajaxSetup ({
         cache: false
-		});
+	});
 
-		//ajax_load = "<img class='loading' src='img/ajax-loading.gif' alt='loading...' />";
 	
 	$('#submitBtn').click(function(){
-		 
-		//load() functions
-		//var loadUrl = "file:///C:/Users/v543644/Desktop/portfolio/index.html"; //"ajax/load.php";
-		//$('#result').show("slow");
-		//$("#result").html(ajax_load);//.load(loadUrl);
 
-		getBookName(bookToTranslateName);
+		getBookName(bookToTranslateName,toLang,'#toLangDiv','#toLangHead','#resultContentTo');
 
 		/*
 		$.ajax({
@@ -90,28 +79,20 @@ $(document).ready(function(){
   
 });
 
-function getBookName(book){
+function getBookName(book,lang,resultDiv,resultHeader, resultContent){
 
 	ajax_load = "<img class='loading' src='img/loading.gif' alt='loading...' />";
 
 	$('#result').show("slow");
 	$("#result").html(ajax_load);
-	
-	/*
-	$('#fromLangDiv').show();
-	//$('#resultContentFrom').show();
-	$('#fromLangHead').html('Getting book name 1...');
-    $('#resultContentFrom').html('Getting book Content 1...');  
-	
-	$('#toLangDiv').show();
-	//$('#resultContentTo').show();
-	$('#toLangHead').html('Getting book name 2...');
-    $('#resultContentTo').html('Getting book Content 2...');  
-	*/
+
+	var result=lang.split('_');
+	var language=result[0];
+	var Bible_Version=result[1];
 
 	// the parameters we need to pass in our request to StackOverflow's API
 	var request = {p: book,
-				   ver: 'kjv'};
+				   ver: Bible_Version};
 
 	var resultReturned = $.ajax({
 		url: "http://getbible.net/json",
@@ -122,8 +103,7 @@ function getBookName(book){
 		})
 	.done(function(json){
 		$("#result").empty(ajax_load);
-		$('#fromLangDiv').show();
-		//$('#toLangDiv').show();
+		$(resultDiv).show();
 
 		// set text direction
         if (json.direction == 'RTL'){
@@ -134,83 +114,26 @@ function getBookName(book){
 
         var bookName;
 		var output = '';
-            
-
-            jQuery.each(json.book, function(index, value) {
+		
+			jQuery.each(json.book, function(index, value) {
 
             	bookName = '<center><b>'+json.book_name+'</b></center>';
 
             	output += '<br/><b>'+json.book_name+' '+value.chapter_nr+'</b><br/><p class="'+direction+'">';
-            	//$('#result').append('<center><b>'+json.book_name+'</b></center>');
 
             	jQuery.each(value.chapter, function(index, value) {
-            		//output += value.chapter_nr;
-                    output += value.verse_nr + '. ';
+                    output += ' <sup><b>'+value.verse_nr + '</sup></b> ';
                     output += value.verse;
-                    output += '<br/>';
                 });
+                output += '<br/>';
                 
             });
             
-            $('#fromLangHead').html(bookName);
-        	$('#resultContentFrom').html(output);  // <---- Adding book content to the Div
-
-			/*
-        	$('#toLangHead').html(bookName);
-        	$('#resultContentTo').html(output);  // <---- Adding book content to the Div
-			*/
-
-/*
-        // check response type
-        if (json.type == 'book'){
-            var output = '';
-            $('#result').append('<center><b>'+json.book_name+'</b></center>');
-            jQuery.each(json.book, function(index, value) {
-            	//output += '<center><b>'+json.book_name+' '+value.chapter_nr+'</b></center><br/><p class="'+direction+'">';
-            	$('#result').append('<center><b>'+json.book_name+'</b></center>');
-
-            /*	jQuery.each(value.chapter, function(index, value) {
-            		output += value.chapter_nr;
-                    output += value.verse_nr;
-                    output += value.verse;
-                    output += '<br/>';
-                });*/
-                
-        /*    });
-            
-        	jQuery('#result').html(output);  // <---- this is the div id we update
-        	
-        }*/
-
-		//alert(json.book_name);
-
-/*
-		// set text direction
-        if (json.direction == 'RTL'){
-        	var direction = 'rtl';
-        } else {
-        	var direction = 'ltr'; 
-        }
-
-        // check response type
-        if (json.type == 'book'){
-            var output = '';
-            jQuery.each(json.book, function(index, value) {
-            	//output += '<center><b>'+json.book_name+' '+value.chapter_nr+'</b></center><br/><p class="'+direction+'">';
-            	$('#fromLangHead').append('<center><b>'+json.book_name+json.book_nr+'</b></center>');
-
-            	jQuery.each(value.chapter, function(index, value) {
-            		output += value.chapter_nr;
-                    output += value.verse_nr;
-                    output += value.verse;
-                    output += '<br/>';
-                });
-                
-            });
-            
-        	jQuery('#resultContentFrom').html(output);  // <---- this is the div id we update
-        	
-        }*/ 
+            $(resultHeader).html(bookName);
+        	$(resultContent).html(output);  
+        	$('#fromLangBtn').attr("disabled", true);
+  			$('#toLangBtn').attr("disabled", true);
+  			$('#submitBtn').attr("disabled", true);
 
 	})
 	.fail(function(jqXHR, error, errorThrown){

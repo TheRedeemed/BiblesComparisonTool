@@ -58,10 +58,16 @@
 
 .loading{
 	margin:0 auto;
-	height:100px;
-	width:100px;
+	height:350px;
+	width:350px;
 }
 
 .errorDesc{
 	color: #2c3e50;
 }
+
+.resultContent{
+	overflow-y: scroll; 
+	height:400px;
+}
+
