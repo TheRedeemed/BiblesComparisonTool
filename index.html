@@ -24,15 +24,16 @@
 			</button>
 			<a class="navbar-brand" href="#">Bible Language Comparison</a>
 		</div>
-		
-		<div class=" bs-component">
-            <div class="jumbotron ">
-				<br>
-				<h2>Welcome</h2>
-				<p>Bible Language Comparison allows students of the Bible to compare the Bible in different languages.</p>
-				<!--<p id="howTo"><a class="btn btn-primary btn-lg">How does it work?</a></p>-->
-				<button id="howTo" class="btn btn-default btn-md" type="button" data-toggle="modal" data-target="#how">How does it work?</button>
-            </div>
+		<div class="row">
+			<div class=" bs-component">
+				<div class="jumbotron ">
+					<br>
+					<h2>Welcome</h2>
+					<p>Bible Language Comparison allows students of the Bible to compare the Bible in different languages.</p>
+					<!--<p id="howTo"><a class="btn btn-primary btn-lg">How does it work?</a></p>-->
+					<button id="howTo" class="btn btn-default btn-md" type="button" data-toggle="modal" data-target="#how">How does it work?</button>
+				</div>
+			</div>
 		</div>
 
 		<div id="how" class="modal">
@@ -56,42 +57,44 @@
 		  </div>
 		</div>
 		
-		<div class="col-xs-12">
-            <div class="well bs-component alignCenter">
-				<div class="alignCenter">
-					
-					<button id="getBook" class="btn btn-default btn-md " type="button" data-toggle="modal" data-target="#allBooks">Book</button>
-					
-					<div class="selectOptionContainer">
-						<div class="btn-group selectOption">
-						  <button id="fromLangBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							Language
-							<span class="caret"></span>
-						  </button>
-						  <ul id="fromLangVal" class="dropdown-menu">
-							<li><a href="#">English_kjv</a></li>
-							<li><a href="#">French_martin</a></li>
-						   </ul>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="well bs-component alignCenter">
+					<div class="alignCenter">
+						
+						<button id="getBook" class="btn btn-default btn-md " type="button" data-toggle="modal" data-target="#allBooks">Book</button>
+						
+						<div class="selectOptionContainer">
+							<div class="btn-group selectOption">
+							  <button id="fromLangBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								Language
+								<span class="caret"></span>
+							  </button>
+							  <ul id="fromLangVal" class="dropdown-menu">
+								<li><a href="#">English_kjv</a></li>
+								<li><a href="#">French_martin</a></li>
+							   </ul>
+							</div>
 						</div>
-					</div>
-					
-					<div class="selectOptionContainer">
-						<div class="btn-group selectOption">
-						  <button id="toLangBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-							Language
-							<span class="caret"></span>
-						  </button>
-						  <ul id="toLangVal" class="dropdown-menu">
-							<li><a href="#">English_kjv</a></li>
-							<li><a href="#">French_martin</a></li>
-						   </ul>
+						
+						<div class="selectOptionContainer">
+							<div class="btn-group selectOption">
+							  <button id="toLangBtn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								Language
+								<span class="caret"></span>
+							  </button>
+							  <ul id="toLangVal" class="dropdown-menu">
+								<li><a href="#">English_kjv</a></li>
+								<li><a href="#">French_martin</a></li>
+							   </ul>
+							</div>
 						</div>
-					</div>
-					
-					<button id="submitBtn" type="button" class="btn btn-primary btn-md">Submit</button>
-					
-				</div>	
-          </div>
+						
+						<button id="submitBtn" type="button" class="btn btn-primary btn-md">Submit</button>
+						
+					</div>	
+			  </div>
+			</div>
 		</div>
 		
 		<div id="allBooks" class="modal">
@@ -189,9 +192,15 @@
 		</div>
 
 		<!--<div id="result" class="col-lg-12 alignCenter">-->
+		<!--
+		<div class="row">
 			<div id="result" class="col-lg-12 alignCenter">
 			</div>
-			<div class="col-lg-6">
+		</div>	
+		-->
+		
+		<div class="row">	
+			<div class="col-lg-5">
 				<div id="fromLangDiv" class="panel panel-primary">
 					<div class="panel-heading">
 					  <h3 class="panel-title" id="fromLangHead"></h3>
@@ -202,7 +211,10 @@
 				</div>
 			</div>
 			
-			<div class="col-lg-6">
+			<div id="result" class="col-lg-2 alignCenter">
+			</div>
+			
+			<div class="col-lg-5">
 				<div id="toLangDiv" class="panel panel-primary">
 					<div class="panel-heading">
 					  <h3 class="panel-title" id="toLangHead"></h3>
@@ -212,6 +224,7 @@
 					</div>
 				</div>	
 			</div>
+		</div>	
 		<!--</div>-->
 		
 		<div id="error" class="alignCenter ">
