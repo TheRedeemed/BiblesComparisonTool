@@ -117,7 +117,7 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
 		
 			jQuery.each(json.book, function(index, value) {
 
-            	bookName = '<center><b>'+json.book_name+'</b></center>';
+            	bookName = '<center><b>'+json.book_name+" ("+Bible_Version+')</b></center>';
 
             	output += '<br/><b>'+json.book_name+' '+value.chapter_nr+'</b><br/><p class="'+direction+'">';
 
@@ -132,8 +132,8 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
             $(resultHeader).html(bookName);
         	$(resultContent).html(output);  
         	/*$('#fromLangBtn').attr("disabled", true);
-  		$('#toLangBtn').attr("disabled", true);
-  		$('#submitBtn').attr("disabled", true);*/
+  			$('#toLangBtn').attr("disabled", true);
+  			$('#submitBtn').attr("disabled", true);*/
 
 	})
 	.fail(function(jqXHR, error, errorThrown){
