@@ -131,9 +131,9 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
             
             $(resultHeader).html(bookName);
         	$(resultContent).html(output);  
-        	$('#fromLangBtn').attr("disabled", true);
-  			$('#toLangBtn').attr("disabled", true);
-  			$('#submitBtn').attr("disabled", true);
+        	/*$('#fromLangBtn').attr("disabled", true);
+  		$('#toLangBtn').attr("disabled", true);
+  		$('#submitBtn').attr("disabled", true);*/
 
 	})
 	.fail(function(jqXHR, error, errorThrown){
