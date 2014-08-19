@@ -12,6 +12,7 @@ $(document).ready(function(){
   $('#toLangDiv').hide();
   //$('#resultContentTo').hide();
   $('#error').hide();
+  $('#resultPane').hide();
   $('#fromLangBtn').attr("disabled", true);
   $('#toLangBtn').attr("disabled", true);
   $('#submitBtn').attr("disabled", true);
@@ -22,6 +23,9 @@ $(document).ready(function(){
 	
 	$('#fromLangDiv').hide();
 	$('#toLangDiv').hide();
+	$('#fromLangHead').hide();
+	$('#toLangHead').hide();
+	$('#resultPane').hide();
 	$('#allBooks').modal('hide');
 	
 	if(bookToTranslateName != ''){
@@ -36,7 +40,7 @@ $(document).ready(function(){
 		if(fromLang != ''){
 		$('#toLangBtn').attr("disabled", false);
 
-		getBookName(bookToTranslateName,fromLang,'#fromLangDiv','#fromLangHead','#resultContentFrom');
+		//getBookName(bookToTranslateName,fromLang,'#fromLangDiv','#fromLangHead','#resultContentFrom');
 		
 		}
 	});
@@ -57,7 +61,8 @@ $(document).ready(function(){
 
 	
 	$('#submitBtn').click(function(){
-
+		
+		getBookName(bookToTranslateName,fromLang,'#fromLangDiv','#fromLangHead','#resultContentFrom');
 		getBookName(bookToTranslateName,toLang,'#toLangDiv','#toLangHead','#resultContentTo');
 
 		/*
@@ -84,6 +89,8 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
 	ajax_load = "<img class='loading' src='img/loading.gif' alt='loading...' />";
 
 	$('#result').show("slow");
+	$('#resultPane').show("slow");
+	$(resultHeader).show();
 	$("#result").html(ajax_load);
 
 	var result=lang.split('_');
