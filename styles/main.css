@@ -58,8 +58,8 @@
 
 .loading{
 	margin:0 auto;
-	height:350px;
-	width:350px;
+	height:50px;
+	width:50px;
 }
 
 .errorDesc{
@@ -69,6 +69,21 @@
 .resultContent{
 	overflow-y: scroll; 
 	height:400px;
+}
+
+.flow{
+	overflow-y: scroll;
+	height:440px;	
+}
+
+.resultContentFromLang{
+	 border-right: thick double #2c3e50; 
+}
+
+.resultContentToLang{
+/*
+	background-color: #2c3e50;
+	color: #fff;*/
 }
 
 #result{
