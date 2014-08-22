@@ -22,7 +22,7 @@ $(document).ready(function(){
 	bookToTranslateIndex = $(this).index();
 	bookToTranslateName = $(this).text();
 	
-	var chapterLoadStart = "<img class='loading' src='img/loading.gif' alt='loading...' />";
+	var chapterLoadStart = "<img src='img/loading.gif' alt='loading...' />";
 	
 	$('#fromLangDiv').hide();
 	$('#toLangDiv').hide();
