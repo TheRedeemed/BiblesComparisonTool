@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	var bookToTranslateIndex;
 	var bookToTranslateName;
+	var chapterPicked;
 	var fromLang;
 	var toLang;
 	var ajax_load;
@@ -21,6 +22,8 @@ $(document).ready(function(){
 	bookToTranslateIndex = $(this).index();
 	bookToTranslateName = $(this).text();
 	
+	var chapterLoadStart = "<img src='img/chapter_loading.gif' alt='loading...' />";
+	
 	$('#fromLangDiv').hide();
 	$('#toLangDiv').hide();
 	$('#fromLangHead').hide();
@@ -32,7 +35,48 @@ $(document).ready(function(){
 		$('#fromLangBtn').attr("disabled", false);
 	}
 	
+	var bkName = '';
+	var chapNum = '';
+	$.ajax({
+		    url: 'http://getbible.net/json',
+		    dataType: 'jsonp',
+		    data: {p: bookToTranslateName},
+		    jsonp: 'getbible',
+		    success: function(response) {
+				$('#getChpatersLoader').empty(chapterLoadStart);
+				
+				jQuery.each(response.book, function(index, value) {
+					bkName = response.book_name;
+					chapNum = value.chapter_nr;
+                });
+				
+				$('#chapBookName').append(bkName);
+				
+				for(i=1;i<=chapNum;i++){
+					$('#selectChapter').append('<li id="chapterSelected" class="chapter btn btn-default">'+i+'</li>');
+				}
+								
+		        //alert( response.book_name+' '+chapNum); 
+		    },
+		    error: function(xhr, status, error) {
+		        console.log(status + '; ' + error);
+		    }
+		});
+	
+	$('#chapBookName').empty();
+	$('#selectChapter').empty();
+	$('#allChapters').modal('show');
+	$('#getChpatersLoader').html('<center>'+chapterLoadStart+'</center>');
+	
   });
+    
+	$(document).on("click","#chapterSelected", function() {
+		var index = $("#chapterSelected").index(this);
+		chapterPicked = $(this).text();
+		
+		$('#allChapters').modal('hide');
+		//alert(chapterPicked);
+	});
 	
 	$('#fromLangVal li').click(function(){
 		fromLang = $(this).text();
@@ -62,8 +106,12 @@ $(document).ready(function(){
 	
 	$('#submitBtn').click(function(){
 		
-		getBookName(bookToTranslateName,fromLang,'#fromLangDiv','#fromLangHead','#resultContentFrom');
-		getBookName(bookToTranslateName,toLang,'#toLangDiv','#toLangHead','#resultContentTo');
+		if(chapterPicked == null){
+			chapterPicked = 1;
+		}
+		
+		getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead','#resultContentFrom');
+		getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead','#resultContentTo');
 
 		/*
 		$.ajax({
@@ -84,7 +132,7 @@ $(document).ready(function(){
   
 });
 
-function getBookName(book,lang,resultDiv,resultHeader, resultContent){
+function getBookName(book,lang,chapterNum,resultDiv,resultHeader, resultContent){
 
 	ajax_load = "<img class='loading' src='img/loading.gif' alt='loading...' />";
 
@@ -98,7 +146,7 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
 	var Bible_Version=result[1];
 
 	// the parameters we need to pass 
-	var request = {p: book+1,
+	var request = {p: book+chapterNum,
 				   ver: Bible_Version};
 
 	var resultReturned = $.ajax({
@@ -124,7 +172,7 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
 		var output = '';
 			
 			bookName = '<center><b>'+json.book_name+" ("+Bible_Version+')</b></center>';
-			output += '<b>'+json.book_name+' '+1+'</b><br/><br/><p class="'+direction+'">';
+			output += '<b>'+json.book_name+' '+chapterNum+'</b><br/><br/><p class="'+direction+'">';
 			
 			jQuery.each(json.chapter, function(index, value) {
             	
