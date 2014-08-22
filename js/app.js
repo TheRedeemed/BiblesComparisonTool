@@ -97,8 +97,8 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
 	var language=result[0];
 	var Bible_Version=result[1];
 
-	// the parameters we need to pass in our request to StackOverflow's API
-	var request = {p: book,
+	// the parameters we need to pass 
+	var request = {p: book+1,
 				   ver: Bible_Version};
 
 	var resultReturned = $.ajax({
@@ -110,6 +110,7 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
 		})
 	.done(function(json){
 		$("#result").empty(ajax_load);
+		$('#result').hide("slow");
 		$(resultDiv).show();
 
 		// set text direction
@@ -121,18 +122,19 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
 
         var bookName;
 		var output = '';
-		
-			jQuery.each(json.book, function(index, value) {
-
-            	bookName = '<center><b>'+json.book_name+" ("+Bible_Version+')</b></center>';
-
-            	output += '<br/><b>'+json.book_name+' '+value.chapter_nr+'</b><br/><p class="'+direction+'">';
-
-            	jQuery.each(value.chapter, function(index, value) {
+			
+			bookName = '<center><b>'+json.book_name+" ("+Bible_Version+')</b></center>';
+			output += '<b>'+json.book_name+' '+1+'</b><br/><br/><p class="'+direction+'">';
+			
+			jQuery.each(json.chapter, function(index, value) {
+            	
+				output += ' <sup><b>'+value.verse_nr + '</sup></b> ';
+                output += value.verse;
+            	/*jQuery.each(value.chapter, function(index, value) {
                     output += ' <sup><b>'+value.verse_nr + '</sup></b> ';
                     output += value.verse;
-                });
-                output += '<br/>';
+                });*/
+                //output += '<br/>';
                 
             });
             
@@ -146,6 +148,7 @@ function getBookName(book,lang,resultDiv,resultHeader, resultContent){
 	.fail(function(jqXHR, error, errorThrown){
 		
 		$("#result").empty(ajax_load);
+		$('#resultPane').hide("slow");
 		$('#error').show("slow");
 		$('#errorContent').append(error + '<br>');
 		$('#errorContent').append(errorThrown);
