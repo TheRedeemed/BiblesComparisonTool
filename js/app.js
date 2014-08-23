@@ -22,7 +22,7 @@ $(document).ready(function(){
 	bookToTranslateIndex = $(this).index();
 	bookToTranslateName = $(this).text();
 	
-	var chapterLoadStart = "<img src='img/loading.gif' alt='loading...' />";
+	var chapterLoadStart = "<img src='img/chapter_loading.gif' alt='loading...' />";
 	
 	$('#fromLangDiv').hide();
 	$('#toLangDiv').hide();
@@ -109,9 +109,10 @@ $(document).ready(function(){
 		if(chapterPicked == null){
 			chapterPicked = 1;
 		}
-		
-		getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead','#resultContentFrom');
-		getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead','#resultContentTo');
+		var back = '<span class="glyphicon glyphicon-circle-arrow-left pull-left"></span>';
+		var forward = '<span class="glyphicon glyphicon-circle-arrow-right pull-right"></span>';
+		getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+		getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
 
 		/*
 		$.ajax({
@@ -132,7 +133,7 @@ $(document).ready(function(){
   
 });
 
-function getBookName(book,lang,chapterNum,resultDiv,resultHeader, resultContent){
+function getBookName(book,lang,chapterNum,resultDiv,resultHeader,chapNav,resultContent){
 
 	ajax_load = "<img class='loading' src='img/loading.gif' alt='loading...' />";
 
@@ -170,9 +171,13 @@ function getBookName(book,lang,chapterNum,resultDiv,resultHeader, resultContent)
 
         var bookName;
 		var output = '';
+		var chapNavArrow;
+		var chapTitle;
 			
 			bookName = '<center><b>'+json.book_name+" ("+Bible_Version+')</b></center>';
-			output += '<b>'+json.book_name+' '+chapterNum+'</b><br/><br/><p class="'+direction+'">';
+
+			chapTitle = '<center><b>'+json.book_name+' '+chapterNum+'</b></center><br/>';
+			output += '<p class="'+direction+'">';
 			
 			jQuery.each(json.chapter, function(index, value) {
             	
@@ -187,7 +192,7 @@ function getBookName(book,lang,chapterNum,resultDiv,resultHeader, resultContent)
             });
             
             $(resultHeader).html(bookName);
-        	$(resultContent).html(output);  
+        	$(resultContent).html(chapNav+chapTitle+output);  
         	/*$('#fromLangBtn').attr("disabled", true);
   			$('#toLangBtn').attr("disabled", true);
   			$('#submitBtn').attr("disabled", true);*/
