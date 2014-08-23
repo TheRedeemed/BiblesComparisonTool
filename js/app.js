@@ -109,8 +109,8 @@ $(document).ready(function(){
 		if(chapterPicked == null){
 			chapterPicked = 1;
 		}
-		var back = '<span class="glyphicon glyphicon-circle-arrow-left pull-left"></span>';
-		var forward = '<span class="glyphicon glyphicon-circle-arrow-right pull-right"></span>';
+		var back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
+		var forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
 		getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
 		getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
 
@@ -128,6 +128,24 @@ $(document).ready(function(){
 		    }
 		});*/
 
+	});
+	
+	$(document).on("click","#prev", function() {
+		//alert('Previous Chapter');
+		--chapterPicked;
+		var back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
+		var forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
+		getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+		getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+	});
+	
+	$(document).on("click","#next", function() {
+		//alert('Next Chapter');
+		++chapterPicked;
+		var back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
+		var forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
+		getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+		getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
 	});
 	
   
