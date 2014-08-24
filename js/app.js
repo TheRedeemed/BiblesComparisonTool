@@ -6,6 +6,10 @@ $(document).ready(function(){
 	var fromLang;
 	var toLang;
 	var ajax_load;
+	var chapCount;
+
+	var back;
+	var forward;
 	
   $('#result').hide();
   $('#fromLangDiv').hide();
@@ -36,7 +40,7 @@ $(document).ready(function(){
 	}
 	
 	var bkName = '';
-	var chapNum = '';
+	chapCount = '';
 	$.ajax({
 		    url: 'http://getbible.net/json',
 		    dataType: 'jsonp',
@@ -47,16 +51,16 @@ $(document).ready(function(){
 				
 				jQuery.each(response.book, function(index, value) {
 					bkName = response.book_name;
-					chapNum = value.chapter_nr;
+					chapCount = value.chapter_nr;
                 });
 				
 				$('#chapBookName').append(bkName);
 				
-				for(i=1;i<=chapNum;i++){
+				for(i=1;i<=chapCount;i++){
 					$('#selectChapter').append('<li id="chapterSelected" class="chapter btn btn-default">'+i+'</li>');
 				}
 								
-		        //alert( response.book_name+' '+chapNum); 
+		        //alert( response.book_name+' '+chapCount); 
 		    },
 		    error: function(xhr, status, error) {
 		        console.log(status + '; ' + error);
@@ -109,10 +113,33 @@ $(document).ready(function(){
 		if(chapterPicked == null){
 			chapterPicked = 1;
 		}
-		var back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
-		var forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
-		getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
-		getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+
+		if(chapterPicked == 1 ){
+
+			back = '<div id="prev"></div>';
+			forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
+
+			getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+			getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');	
+
+		} else if(chapterPicked == chapCount){
+
+			back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
+			forward = '<div id="next"></div>';
+
+			getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+			getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+
+		} else {
+
+			back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
+			forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
+
+			getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+			getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+
+		}
+		
 
 		/*
 		$.ajax({
@@ -131,21 +158,64 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click","#prev", function() {
-		//alert('Previous Chapter');
 		--chapterPicked;
-		var back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
-		var forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
-		getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
-		getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+		if(chapterPicked == 1 ){
+
+			back = '<div id="prev"></div>';
+			forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
+
+			getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+			getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');	
+
+		} else if(chapterPicked == chapCount){
+
+			back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
+			forward = '<div id="next"></div>';
+
+			getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+			getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+
+		} else {
+
+			back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
+			forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
+
+			getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+			getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+
+		}
+		
 	});
 	
 	$(document).on("click","#next", function() {
-		//alert('Next Chapter');
 		++chapterPicked;
-		var back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
-		var forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
-		getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
-		getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+
+		if(chapterPicked == 1 ){
+
+			back = '<div id="prev"></div>';
+			forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
+
+			getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+			getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');	
+
+		} else if(chapterPicked == chapCount){
+
+			back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
+			forward = '<div id="next"></div>';
+
+			getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+			getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+
+		} else {
+
+			back = '<div id="prev" class="glyphicon glyphicon-circle-arrow-left pull-left"></div>';
+			forward = '<div id="next" class="glyphicon glyphicon-circle-arrow-right pull-right"></div>';
+
+			getBookName(bookToTranslateName,fromLang,chapterPicked,'#fromLangDiv','#fromLangHead',back,'#resultContentFrom');
+			getBookName(bookToTranslateName,toLang,chapterPicked,'#toLangDiv','#toLangHead',forward,'#resultContentTo');
+
+		}
+		
 	});
 	
   
@@ -210,7 +280,7 @@ function getBookName(book,lang,chapterNum,resultDiv,resultHeader,chapNav,resultC
             });
             
             $(resultHeader).html(bookName);
-        	$(resultContent).html(chapNav+chapTitle+output);  
+        	$(resultContent).html(chapNav+chapTitle+output+chapNav+chapTitle);  
         	/*$('#fromLangBtn').attr("disabled", true);
   			$('#toLangBtn').attr("disabled", true);
   			$('#submitBtn').attr("disabled", true);*/
